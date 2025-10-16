@@ -1,6 +1,14 @@
 FILEPATH = "todos.txt"
 
+import os
+
+def ensure_file_exists(filepath=FILEPATH):
+    if not os.path.exists(filepath):
+        with open(filepath, 'w') as file:
+            pass
+
 def show_todos():
+    ensure_file_exists()
     todos = []
     with open(FILEPATH, 'r') as file:
         todos = [todo.strip() for todo in file.readlines()]
@@ -16,6 +24,7 @@ def get_todos(filepath= FILEPATH):
     :param filepath:
     :return: todos
     """
+    ensure_file_exists()
     todos = []
     with open(filepath, 'r') as file:
         todos = file.readlines()
